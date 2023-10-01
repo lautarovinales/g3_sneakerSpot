@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <title>Sneaker Spot | Crear producto</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-productEdit.css">
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+        <main>
+            <section>
+                <div class="div-img">
+                    <img src="images/logo.png" alt="" class="imagen-login">
+                </div>
+                <form action="/product/edit/<%= producto.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <h2>Editar producto</h2>
+                    <label for="title">Nombre del calzado:</label>
+                    <input type="text" name="title" placeholder="Nombre del calzado" value="<%= producto.title %>">
+
+                    <label for="img">Imagen del calzado:</label>
+                    <input type="file" name="img" class="fileinput">
+
+                    <label for="class">Clase de calzado:</label>
+                    <input type="text" name="class" placeholder="Clase de calzado" value="<%= producto.class %>">
+
+                    <label for="history">Descripcion del calzado:</label>
+                    <textarea name="history" cols="60" rows="7"><%= producto.history %></textarea>
+
+                    <label for="discount">Descuento del calzado:</label>
+                    <input type="text" name="discount" value="<%= producto.discount %>">
+
+                    <label for="price">Precio del calzado:</label>
+                    <input type="number" name="price" placeholder="Precio" value="<%= producto.price %>">
+                    <button type="submit">Guardar cambios</button>
+                </form>
+            </section>
+        </main>
+        <%- include('../partials/footer.ejs') %>
+            <script src="./js/script.js"></script>
+</body>
+
+</html>
