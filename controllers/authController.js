@@ -18,7 +18,16 @@ const upload = multer({ storage: storage });
 
 const authController = {
   profile: (req, res) => {
-    res.render('users/profile');
+    const userId = req.session.userId;
+    const usuario = dataBaseUsers.user.find(user => user.id === userId);
+
+    if (usuario) {
+      // Renderizar la vista y pasar la información del usuario
+      res.render('users/profile', { usuario });
+    } else {
+      // Manejar el caso en que el usuario no se encuentre (posiblemente ha manipulado la sesión)
+      res.redirect('/login'); // o redirigir a otra página
+    }
   },
 
     login: (req, res) => {
@@ -92,6 +101,9 @@ const authController = {
           // Almacenar el ID del usuario en la sesión
           req.session.userId = usuario.id;
     
+          // Console.log de los datos del usuario
+          console.log('Usuario logeado:', usuario);
+    
           // Redirigir a la página de perfil con un mensaje de éxito
           return res.redirect('/?mensaje=¡Enhorabuena, iniciaste sesión!');
         } else {
@@ -102,7 +114,8 @@ const authController = {
         // Credenciales incorrectas
         return res.send('Credenciales incorrectas');
       }
-    },
+    }
+    ,
       doLogout: (req, res) => {
         req.session.destroy(err => {
           if (err) {
