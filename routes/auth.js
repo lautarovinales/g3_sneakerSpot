@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController'); // Importa el controlador de autenticación
+const verificarAutenticacion = require('../middlewares/verificarAutenticacion');
 
 // Ruta para mostrar la página de inicio de sesión
 // Ruta: /login
@@ -9,7 +10,7 @@ const authController = require('../controllers/authController'); // Importa el c
 // Controlador: authController.login
 router.get('/login', authController.login);
 
-router.get('/profile', authController.profile);
+router.get('/profile', verificarAutenticacion, authController.profile);
 
 // Ruta para mostrar la página de registro
 // Ruta: /register

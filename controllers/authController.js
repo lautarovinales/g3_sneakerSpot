@@ -79,30 +79,30 @@ const authController = {
     ],
 
     doLogin: async (req, res) => {
-        const { email, password } = req.body;
+      const { email, password } = req.body;
     
-        // Buscar el usuario en la base de datos
-        const usuario = dataBaseUsers.user.find(user => user.email === email);
+      // Buscar el usuario en la base de datos
+      const usuario = dataBaseUsers.user.find(user => user.email === email);
     
-        if (usuario) {
-          // Verificar la contraseña con bcrypt
-          const contraseñaValida = await bcrypt.compare(password, usuario.password);
+      if (usuario) {
+        // Verificar la contraseña con bcrypt
+        const contraseñaValida = await bcrypt.compare(password, usuario.password);
     
-          if (contraseñaValida) {
-            // Almacenar el ID del usuario en la sesión
-            req.session.userId = usuario.id;
+        if (contraseñaValida) {
+          // Almacenar el ID del usuario en la sesión
+          req.session.userId = usuario.id;
     
-            // Redirigir a la página principal con un mensaje de éxito
-            return res.redirect('/?mensaje=¡Enhorabuena, iniciaste sesión!');
-          } else {
-            // Credenciales incorrectas
-            return res.send('Credenciales incorrectas');
-          }
+          // Redirigir a la página de perfil con un mensaje de éxito
+          return res.redirect('/?mensaje=¡Enhorabuena, iniciaste sesión!');
         } else {
           // Credenciales incorrectas
           return res.send('Credenciales incorrectas');
         }
-      },
+      } else {
+        // Credenciales incorrectas
+        return res.send('Credenciales incorrectas');
+      }
+    },
       doLogout: (req, res) => {
         req.session.destroy(err => {
           if (err) {
