@@ -12,13 +12,13 @@ router.get('/', productController.list);
 
 router.get('/cart', verificarAutenticacion, productController.cart);
 
-router.get('/creation', productController.creation);
+router.get('/creation', verificarAutenticacion, productController.creation);
 
 router.post('/creation', productController.createProduct);
 
 router.get('/catalogo', productController.catalogo);
 
-router.get('/edit/:id', productController.showEditById);
+router.get('/edit/:id', verificarAutenticacion, productController.showEditById);
 
 router.put('/edit/:id', productController.editById);
 

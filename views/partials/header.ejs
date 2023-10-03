@@ -1,6 +1,8 @@
 <div class="register-login">
   <% if (userId) { %>
     <a href="/profile"><i class="fa-solid fa-user user"></i></a>
+    <!-- Mostrar el carrito solo cuando el usuario ha iniciado sesión -->
+    <a href="/product/cart"><button class="cart-icon"><i class="fas fa-shopping-cart"></i></button></a>
   <% } else { %>
     <a href="/login"><i class="fa-solid fa-right-to-bracket login"></i></a>
   <% } %>
@@ -16,7 +18,6 @@
     <div class="searchbar">
       <input class="search-txt" type="search" name="" id=""><button class="search-icon"><i class="fas fa-search search-button" style="color: #5A56E9;"></i></button>
     </div>
-    <a href="/product/cart"><button class="cart-icon"><i class="fas fa-shopping-cart" style="color: #ffffff;"></i></button></a>
     <nav class="menu">
       <input type="checkbox" id="check">
       <label for="check" class="checkbtn">
